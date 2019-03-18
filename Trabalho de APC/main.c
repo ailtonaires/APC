@@ -174,7 +174,7 @@ void atualizar_disc(char nome_disciplina[],int alunos_SS,int alunos_MS,int aluno
 	fprintf(relatorio,"%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d",alunos_matriculados,trancamentos,alunos_SS,alunos_MS,alunos_MM,alunos_MI,alunos_II,alunos_SR,percentual[0],percentual[1],percentual[2]);
 	fclose(relatorio);
 
-	// pior_melhor(disc_geral, nome_disc);
+	// TESTE KKK pior_melhor(disc_geral, nome_disc);
 }
 
 void decrementar_arq_geral(char disc_geral[]) {
