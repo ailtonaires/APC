@@ -1,38 +1,38 @@
-#include "blocknumeros.h" // Biblioteca criada para bloquear números
-#include <conio.h> // Para usar funções como getch e getchar
-#include <ctype.h> // Para usar funções como isdigit e isalpha
-#include <locale.h> // Para corrigir erros de acentuação e português
-#include <stdio.h> // Para utilizar funções padrão, como printf e scanf
-#include <stdlib.h> // Para utilizar funções como atoi, itoa e exit
-#include <string.h> // Para usar funções para strings, como strcpy e strcmp
-#include <windows.h> // Para utilizar funções como Sleep
+#include "blocknumeros.h" // Biblioteca criada para bloquear nÃºmeros
+#include <conio.h> // Para usar funÃ§Ãµes como getch e getchar
+#include <ctype.h> // Para usar funÃ§Ãµes como isdigit e isalpha
+#include <locale.h> // Para corrigir erros de acentuaÃ§Ã£o e portuguÃªs
+#include <stdio.h> // Para utilizar funÃ§Ãµes padrÃ£o, como printf e scanf
+#include <stdlib.h> // Para utilizar funÃ§Ãµes como atoi, itoa e exit
+#include <string.h> // Para usar funÃ§Ãµes para strings, como strcpy e strcmp
+#include <windows.h> // Para utilizar funÃ§Ãµes como Sleep
 #define TAM_MAX 100
 
-int opcao_escolhida;   // Variável global, utilizada para as opções do menu
-char disciplinas[TAM_MAX]; // Variável global, utilizada para armazenar nomes de disciplinas
-char nomeArquivo[TAM_MAX]; // Variável global, utilizada para armazenar nome do documento da disciplina
+int opcao_escolhida;   // VariÃ¡vel global, utilizada para as opÃ§Ãµes do menu
+char disciplinas[TAM_MAX]; // VariÃ¡vel global, utilizada para armazenar nomes de disciplinas
+char nomeArquivo[TAM_MAX]; // VariÃ¡vel global, utilizada para armazenar nome do documento da disciplina
 char apagar_nome_disc[TAM_MAX];
 int total_alunos;
 FILE *todas_disc; // Ponteiro Onde fica salva nome-codigo das disciplinas
 FILE *relatorio;  // Ponteiro do arquivo de relatorio por disciplina
 
-void bloquear_teclas(int menor_opcao,int maior_opcao) { // Procedimento que só aceita números
+void bloquear_teclas(int menor_opcao,int maior_opcao) { // Procedimento que sÃ³ aceita nÃºmeros
 
 	int i = 0;
 	char b;
 	char opcao[50];
 
-	do { /* Estrutura que verifica se o valor digitado está entre
-		 "menor_opcao" e "maior_opcao" com relação ao menu de opções
-		 e de acordo com cada parâmetro*/
+	do { /* Estrutura que verifica se o valor digitado estÃ¡ entre
+		 "menor_opcao" e "maior_opcao" com relaÃ§Ã£o ao menu de opÃ§Ãµes
+		 e de acordo com cada parÃ¢metro*/
 
-		do { /* Estrutura para aceitar apenas números, bloqueando
-			 a digitação de quaisquer outros caracteres, exceto backspace e
+		do { /* Estrutura para aceitar apenas nÃºmeros, bloqueando
+			 a digitaÃ§Ã£o de quaisquer outros caracteres, exceto backspace e
 			 enter*/
 
 			b = getch();
 			if (isdigit(b) != 0) { // Se for uma letra, retorna diferente de 0, ou seja, entra dentro da condicional
-				opcao[i] = b; // string passa a receber o valor de "b" caso seja um caracter diferente de um número
+				opcao[i] = b; // string passa a receber o valor de "b" caso seja um caracter diferente de um nÃºmero
 				i++;
 				printf("%c", b); // printa na tela se for uma letra
 			}
@@ -40,7 +40,7 @@ void bloquear_teclas(int menor_opcao,int maior_opcao) { // Procedimento que só a
 			else if (b == 8 && i) { // Caso "b" seja igual a backspace, ele ira retirar um caracter da string
 				opcao[i] = '\0';
 
-				i--;             // o "i" será decrementado para seguir a ordem da string
+				i--;             // o "i" serÃ¡ decrementado para seguir a ordem da string
 				printf("\b \b"); // Remove um caracter da tela, caso "b" seja 8 // 8 = backspace na tabela ASCII
 			}
 		} while (b != 13); // Fazer enquanto "b" for diferente de 13 // 13 = Enter na tabela ASCII
@@ -49,23 +49,23 @@ void bloquear_teclas(int menor_opcao,int maior_opcao) { // Procedimento que só a
 
 		opcao_escolhida = atoi(opcao); // Transforma um char para inteiro
 
-	} while (opcao_escolhida < menor_opcao || opcao_escolhida > maior_opcao); // Fazer enquanto "opcao_Escolhida" for maior ou menor que os parâmetros
+	} while (opcao_escolhida < menor_opcao || opcao_escolhida > maior_opcao); // Fazer enquanto "opcao_Escolhida" for maior ou menor que os parÃ¢metros
 }
 
 int main() {
 
 	FILE *arq_geral;   // Ponteiro para abertura do arquivo geral
-	FILE *melhor_disc; // Ponteiro para abertura do arquivo com maior aprovação
-	FILE *pior_disc;   // Ponteiro para abertura do arquivo de menor aprovação
+	FILE *melhor_disc; // Ponteiro para abertura do arquivo com maior aprovaÃ§Ã£o
+	FILE *pior_disc;   // Ponteiro para abertura do arquivo de menor aprovaÃ§Ã£o
 
-	setlocale(LC_ALL, "Portuguese"); // Correção de erros na parte escrita
-									 // apresentada na execução do programa
+	setlocale(LC_ALL, "Portuguese"); // CorreÃ§Ã£o de erros na parte escrita
+									 // apresentada na execuÃ§Ã£o do programa
 
 	arq_geral = fopen("geral.txt", "r");
 	fclose(arq_geral);
 
-	if (arq_geral == NULL) { // Verificar se o arquivo geral existe. Caso não
-							 // exista, ele será criado.
+	if (arq_geral == NULL) { // Verificar se o arquivo geral existe. Caso nÃ£o
+							 // exista, ele serÃ¡ criado.
 		arq_geral = fopen("geral.txt", "w");
 
 		fprintf(arq_geral, "0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n");
@@ -77,7 +77,7 @@ int main() {
 	fclose(todas_disc);
 
 	if (todas_disc == NULL) { // Verificar se o arquivo com o nome das
-							  // disciplinas existe. Caso não exista, ele será
+							  // disciplinas existe. Caso nÃ£o exista, ele serÃ¡
 							  // criado.
 
 		todas_disc = fopen("todas_disc.txt", "w");
@@ -87,8 +87,8 @@ int main() {
 	melhor_disc = fopen("melhor_disc.txt", "r");
 
 	if (melhor_disc == NULL) { // Verificar se o arquivo da disciplina com o
-							   // melhor indice de aprovação existe.
-							   // Caso não exista, ele será criado.
+							   // melhor indice de aprovaÃ§Ã£o existe.
+							   // Caso nÃ£o exista, ele serÃ¡ criado.
 		melhor_disc = fopen("melhor_disc.txt", "w");
 		fprintf(melhor_disc, "0\n0");
 		fclose(melhor_disc);
@@ -98,8 +98,8 @@ int main() {
 	pior_disc = fopen("pior_disc.txt", "r");
 
 	if (pior_disc == NULL) { // Verificar se o arquivo da disciplina com o
-							 // melhor indice de aprovação existe.
-							 // Caso não exista, ele será criado.
+							 // melhor indice de aprovaÃ§Ã£o existe.
+							 // Caso nÃ£o exista, ele serÃ¡ criado...
 
 		pior_disc = fopen("pior_disc.txt", "w");
 		fprintf(pior_disc, "101\n0");
@@ -239,7 +239,7 @@ void verificar_disc(char *nome_disc) {
 		fgets(encontrar_disc, 200, todas_disc);
 
 		strcpy(apagar_nome_disc, encontrar_disc); // UTILIZADO PARA QUANDO A
-												  // FUNÇÃO FOR CHAMADA PARA
+												  // FUNÃ‡ÃƒO FOR CHAMADA PARA
 												  // APAGAR DISCIPLINA
 
 		if (strstr(encontrar_disc, nome) != NULL) {
@@ -251,8 +251,8 @@ void verificar_disc(char *nome_disc) {
 
 					if (strcmp(encontrar_disc0, nome_disc) != 0) {
                         cont++;                                         // Cont Para saber quantas disciplinas existem com parte do nome digitado
-						fprintf(ARQ_TEMP, "\n%d)%s", cont, nome_disc); // Printa as disciplinas encontradas com parte do nome dentro do arquivo temporário
-						strcpy(encontrar_disc0, nome_disc); // Para não repetir a última disciplina
+						fprintf(ARQ_TEMP, "\n%d)%s", cont, nome_disc); // Printa as disciplinas encontradas com parte do nome dentro do arquivo temporÃ¡rio
+						strcpy(encontrar_disc0, nome_disc); // Para nÃ£o repetir a Ãºltima disciplina
 					}
 				}
 			}
@@ -263,13 +263,13 @@ void verificar_disc(char *nome_disc) {
 	fclose(ARQ_TEMP);
 
 	if (cont == 0) {
-		printf("\n Desculpe, a disciplina que você procura com o nome %s não existe!\n\n",nome);
+		printf("\n Desculpe, a disciplina que vocÃª procura com o nome %s nÃ£o existe!\n\n",nome);
 
 		printf(" 1) Ir para o menu inicial\n");
 		printf(" 2) Ver disciplinas cadastradas\n");
 		printf(" 3) Encerrar o programa\n\n");
-		printf(" Opção: ");
-		bloquear_teclas(menor_opcao = 1, maior_opcao = 3); // Chamada de Procedimento que só aceita números
+		printf(" OpÃ§Ã£o: ");
+		bloquear_teclas(menor_opcao = 1, maior_opcao = 3); // Chamada de Procedimento que sÃ³ aceita nÃºmeros
 
 		switch (opcao_escolhida) {
 		case 1:
@@ -292,12 +292,12 @@ void verificar_disc(char *nome_disc) {
 	if (cont != 0) {
 		system("type arquivo_temporario.txt");
 
-		printf("\n\n %d disciplina(s) que contenha \"%s\" como parte do nome ou do código foram\n encontrada(s).",cont,nome);
-		printf("\n Por favor, Indique o número correspondente a disciplina que você procura.\n\n");
-		printf(" Caso a disciplina que você procura não tenha sido encontrada, ela não existe.\n");
+		printf("\n\n %d disciplina(s) que contenha \"%s\" como parte do nome ou do cÃ³digo foram\n encontrada(s).",cont,nome);
+		printf("\n Por favor, Indique o nÃºmero correspondente a disciplina que vocÃª procura.\n\n");
+		printf(" Caso a disciplina que vocÃª procura nÃ£o tenha sido encontrada, ela nÃ£o existe.\n");
 		printf("\n Digite 0 para voltar ao menu principal.\n\n");
 
-		printf(" Opção: ");
+		printf(" OpÃ§Ã£o: ");
 		bloquear_teclas(menor_opcao = 0, maior_opcao = cont);
 
 		itoa(opcao_escolhida, opcao, 10); // Transformar inteiro em char
@@ -341,7 +341,7 @@ void disc_e_codigos(char *nome_disc) {
 	x = strlen(nome_disc);
 
 	for (i = 0; i < x; i++) {
-		nome_disc[i] = toupper(nome_disc[i]); // Transformar todas as letras em maiúsculas
+		nome_disc[i] = toupper(nome_disc[i]); // Transformar todas as letras em maiÃºsculas
 	}
 
 	todas_disc = fopen("todas_disc.txt", "r");
@@ -369,16 +369,16 @@ void disc_e_codigos(char *nome_disc) {
 		}
 
 		if (strcmp(nome_disc, encontrar_disc) == 0) {
-			printf("\n A disciplina e/ou código já existe(m)!!!\n\n");
+			printf("\n A disciplina e/ou cÃ³digo jÃ¡ existe(m)!!!\n\n");
 
 			system("pause");
 
 			printf("\n 1)Encerrar o cadastramento\n");
 			printf(" 2)Voltar para o menu de cadastramento de disciplinas\n");
 			printf(" 3)Cadastrar turma\n\n");
-			printf(" Opção: ");
+			printf(" OpÃ§Ã£o: ");
 
-			bloquear_teclas(menor_opcao = 1,maior_opcao =3); // Chamada de Procedimento que só aceita números
+			bloquear_teclas(menor_opcao = 1,maior_opcao =3); // Chamada de Procedimento que sÃ³ aceita nÃºmeros
 
 			switch (opcao_escolhida) {
 			case 1:
@@ -413,7 +413,7 @@ void cod_turma(char *codigo, char *Turma, char *nome_disciplina) {
 
 	y = strlen(codigo);
 	for (i = 0; i < y; i++) {
-		codigo[i] =toupper(codigo[i]); // Transformar todas as letras em maiúsculas
+		codigo[i] =toupper(codigo[i]); // Transformar todas as letras em maiÃºsculas
 	}
 
 	codTurma = fopen(nome_disciplina, "r");
@@ -454,7 +454,7 @@ void disc_procurar(char *nome_disc) {
 	x = strlen(nome_disc);
 
 	for (i = 0; i < x; i++) {
-		nome_disc[i] =toupper(nome_disc[i]); // Transformar todas as letras em maiúsculas
+		nome_disc[i] =toupper(nome_disc[i]); // Transformar todas as letras em maiÃºsculas
 	}
 
 	todas_disc = fopen("todas_disc.txt", "r");
@@ -470,11 +470,11 @@ void disc_procurar(char *nome_disc) {
 			encontrar_disc3[i] = encontrar_disc[i]; // PEGAR NOME
 
 			if (encontrar_disc[i] == '-') {
-				encontrar_disc3[i] = '\0'; // TIRAR HÍFEN DA STRING
+				encontrar_disc3[i] = '\0'; // TIRAR HÃFEN DA STRING
 
 				for (j = 0; j < z - i; j++) {
 					encontrar_disc2[j] =
-						encontrar_disc[i + j + 1]; // PEGAR CÓDIGO
+						encontrar_disc[i + j + 1]; // PEGAR CÃ“DIGO
 				}
 
 				break;
@@ -488,7 +488,7 @@ void disc_procurar(char *nome_disc) {
 
 		if (strcmp(nome_disc, encontrar_disc2) == 0) {
 			strcpy(apagar_nome_disc, encontrar_disc); // UTILIZADO PARA QUANDO A
-													  // FUNÇÃO FOR CHAMADA PARA
+													  // FUNÃ‡ÃƒO FOR CHAMADA PARA
 													  // APAGAR DISCIPLINA
 
 			for (i = 0; i < 300; i++) {
@@ -506,7 +506,7 @@ void disc_procurar(char *nome_disc) {
 
 		if (strcmp(nome_disc, encontrar_disc3) == 0) {
 			strcpy(apagar_nome_disc, encontrar_disc); // UTILIZADO PARA QUANDO A
-													  // FUNÇÃO FOR CHAMADA PARA
+													  // FUNÃ‡ÃƒO FOR CHAMADA PARA
 													  // APAGAR DISCIPLINA
 
 			for (i = 0; i < 300; i++) {
@@ -527,7 +527,7 @@ void disc_procurar(char *nome_disc) {
 VAI:
 	fclose(todas_disc);
 
-	if (strcmp(nome_disc, encontrar_disc2) !=0) { // SE NÃO ENCONTRAR COM STRCMP ELE PESQUISA POR PARTE
+	if (strcmp(nome_disc, encontrar_disc2) !=0) { // SE NÃƒO ENCONTRAR COM STRCMP ELE PESQUISA POR PARTE
 		verificar_disc(nome_disc);
 	}
 }
@@ -557,7 +557,7 @@ void pior_melhor() {
 				encontrar_disc2[i] = encontrar_disc[i]; // PEGAR NOME
 
 				if (encontrar_disc[i] == '-') {
-					encontrar_disc2[i] = '\0'; // TIRAR HÍFEN DA STRING
+					encontrar_disc2[i] = '\0'; // TIRAR HÃFEN DA STRING
 					strcpy(nome_disc, encontrar_disc2);
 				}
 			}
@@ -677,7 +677,7 @@ void deletar_turma(char *turma, char *nome_disciplina, char *codigo_turma) {
 	x = strlen(turma);
 
 	for (i = 0; i < x; i++) {
-		turma[i] =toupper(turma[i]); // Transformar todas as letras em maiúsculas
+		turma[i] =toupper(turma[i]); // Transformar todas as letras em maiÃºsculas
 	}
 
 	apagar_turma = fopen(nome_disciplina, "r");
@@ -710,13 +710,13 @@ sai:
 	fclose(apagar_turma);
 
 	if (strcmp(turma, encontrar_turma) != 0) {
-		printf("\n Desculpe, a turma que você procura com o nome %s não existe!\n\n",codigo_turma);
+		printf("\n Desculpe, a turma que vocÃª procura com o nome %s nÃ£o existe!\n\n",codigo_turma);
 
 		printf(" 1)Ir para o menu inicial\n");
 		printf(" 2)Cadastrar turma\n");
 		printf(" 3)Encerrar o programa\n\n");
-		printf(" Opção: ");
-		bloquear_teclas(menor_opcao = 1, maior_opcao = 3); // Chamada de Procedimento que só aceita números
+		printf(" OpÃ§Ã£o: ");
+		bloquear_teclas(menor_opcao = 1, maior_opcao = 3); // Chamada de Procedimento que sÃ³ aceita nÃºmeros
 
 		switch (opcao_escolhida) {
 		case 1:
@@ -757,7 +757,7 @@ void decrementar_turma_arq_geral(int info_arq[]) {
 	fclose(cod3);
 
 	percentual = ((info_arq[2] + info_arq[3] + info_arq[4]) * 100) /
-		info_arq[0]; // PARA SABER O PERCENTUAL DE APROVAÇÃO DA TURMA
+		info_arq[0]; // PARA SABER O PERCENTUAL DE APROVAÃ‡ÃƒO DA TURMA
 
 	if (percentual >= 0 && percentual < 30) {
 		perc[0] = 1;
@@ -848,7 +848,7 @@ void decrementar_turma_disc(char nome_disciplina[],int alunos_SS, int alunos_MS,
 	fclose(relatorio);
 }
 
-void opcao1() { // Parâmetro para cadastramento de disciplinas
+void opcao1() { // ParÃ¢metro para cadastramento de disciplinas
 
 	fflush(stdin);
 
@@ -858,29 +858,29 @@ void opcao1() { // Parâmetro para cadastramento de disciplinas
 	char codigoArquivo[TAM_MAX];
 	char disc_geral[TAM_MAX];
 	FILE *ver_arq;  // Ponteiro para abertura do arquivo
-	FILE *cadastro; // Ponteiro para abertura do arquivo da disciplina que será cadastrada
+	FILE *cadastro; // Ponteiro para abertura do arquivo da disciplina que serÃ¡ cadastrada
 
-	system("cls"); // Apagar informações anteriores
+	system("cls"); // Apagar informaÃ§Ãµes anteriores
 
 	printf("\n 1)Cadastrar disciplina \n");
 	printf(" 2)Voltar para o menu inicial \n\n");
-	printf(" Opção: ");
+	printf(" OpÃ§Ã£o: ");
 
-	bloquear_teclas(menor_opcao=1,maior_opcao=2); // Chamada de Procedimento que só aceita números
+	bloquear_teclas(menor_opcao=1,maior_opcao=2); // Chamada de Procedimento que sÃ³ aceita nÃºmeros
 
-	switch (opcao_escolhida) { // Fazer caso o número digitado seja válido e esteja no intervalo proposto
+	switch (opcao_escolhida) { // Fazer caso o nÃºmero digitado seja vÃ¡lido e esteja no intervalo proposto
 	case 1:
 
-	refazer: // Volta para esse ponto caso a disciplina tenha o mesmo nome do código
+	refazer: // Volta para esse ponto caso a disciplina tenha o mesmo nome do cÃ³digo
 
 		do {
 			system("cls");
 			printf("\n Digite o nome da disciplina: ");
 			bloqueia_num(disciplinas);
-			printf("\n Digite o código da disciplina: "); // Fazer enquanto só
+			printf("\n Digite o cÃ³digo da disciplina: "); // Fazer enquanto sÃ³
 														  // for digitado apenas
 														  // enter, sem outras
-														  // informações
+														  // informaÃ§Ãµes
 			fgets(nome_disc, 100, stdin);
 		} while (disciplinas[0] == '\0' || nome_disc[0] == '\n');
 
@@ -894,57 +894,57 @@ void opcao1() { // Parâmetro para cadastramento de disciplinas
 		}
 
 		for (i = 0; i < x; i++) {
-			disciplinas[i] = toupper(disciplinas[i]); // Transformar todas as letras em maiúsculas
+			disciplinas[i] = toupper(disciplinas[i]); // Transformar todas as letras em maiÃºsculas
 		}
 
 		y = strlen(nome_disc);
 
 		for (i = 0; i < y; i++) {
-			nome_disc[i] = toupper(nome_disc[i]); // Transformar todas as letras em maiúsculas
+			nome_disc[i] = toupper(nome_disc[i]); // Transformar todas as letras em maiÃºsculas
 		}
 
-		if (strcmp(disciplinas, nome_disc) ==0) { // Condição para saber se o código tem o mesmo nome da disciplina (evitar conflito)
+		if (strcmp(disciplinas, nome_disc) ==0) { // CondiÃ§Ã£o para saber se o cÃ³digo tem o mesmo nome da disciplina (evitar conflito)
 
-			printf("\n ERRO! A DISCIPLINA NÃO PODE TER O MESMO NOME DO CÓDIGO.\n");
+			printf("\n ERRO! A DISCIPLINA NÃƒO PODE TER O MESMO NOME DO CÃ“DIGO.\n");
 			printf(" Por favor, digite corretamente os dados...\n\n");
 
 			system("pause");
 			system("cls");
 			fflush(stdin);
 
-			goto refazer; // Retorna para um ponto específico, no caso, pedirá
-						  // as informações da disciplina novamente
+			goto refazer; // Retorna para um ponto especÃ­fico, no caso, pedirÃ¡
+						  // as informaÃ§Ãµes da disciplina novamente
 		}
 
 		disc_e_codigos(nome_disc);
 
-		snprintf(nomeArquivo,100,"disciplina_%s.txt",disciplinas); // Função que concatena as informações com a string
+		snprintf(nomeArquivo,100,"disciplina_%s.txt",disciplinas); // FunÃ§Ã£o que concatena as informaÃ§Ãµes com a string
 		cadastro = fopen(nomeArquivo, "r");
 		fclose(cadastro);
 
-		snprintf(codigoArquivo,100,"disciplina_%s.txt",nome_disc); // Função que concatena as informações com a string
+		snprintf(codigoArquivo,100,"disciplina_%s.txt",nome_disc); // FunÃ§Ã£o que concatena as informaÃ§Ãµes com a string
 		ver_arq = fopen(codigoArquivo, "r");
 		fclose(ver_arq);
 
-		if (cadastro == NULL && ver_arq == NULL) { // Verifica se a disciplina já existe
+		if (cadastro == NULL && ver_arq == NULL) { // Verifica se a disciplina jÃ¡ existe
 
 			x = strlen(disciplinas);
 			for (i = 0; i < x; i++) {
-				disciplinas[i] = toupper(disciplinas[i]); // Transformar todasas letras em maiúsculas
+				disciplinas[i] = toupper(disciplinas[i]); // Transformar todasas letras em maiÃºsculas
 			}
 
-			printf("\n Você realmente deseja cadastrar \"%s\" como uma disciplina?\a\a\a",disciplinas);
+			printf("\n VocÃª realmente deseja cadastrar \"%s\" como uma disciplina?\a\a\a",disciplinas);
 			printf("\n\n 1)Sim\n");
-			printf(" 2)Não\n\n");
-			printf(" Opção:");
+			printf(" 2)NÃ£o\n\n");
+			printf(" OpÃ§Ã£o:");
 
-			bloquear_teclas(menor_opcao=1,maior_opcao=2); // Chamada de Procedimento que só aceita números
+			bloquear_teclas(menor_opcao=1,maior_opcao=2); // Chamada de Procedimento que sÃ³ aceita nÃºmeros
 
 			if (opcao_escolhida == 1) {
 				cadastro = fopen(nomeArquivo, "a");
 				fclose(cadastro);
 
-				snprintf(disc_geral, 100, "geral_%s", nomeArquivo); // Função que concatena as informações com a string que servirá
+				snprintf(disc_geral, 100, "geral_%s", nomeArquivo); // FunÃ§Ã£o que concatena as informaÃ§Ãµes com a string que servirÃ¡
                                                                     // para o arquivo geral
 				ver_arq = fopen(codigoArquivo, "r");                // das disciplinas
 
@@ -958,10 +958,10 @@ void opcao1() { // Parâmetro para cadastramento de disciplinas
 				}
 
 				for (i = 0; i < x;i++) { // para printar as disciplinas dentro do todas_disc
-                                        // como maiúsculas para com o intuito de não deixar
+                                        // como maiÃºsculas para com o intuito de nÃ£o deixar
                                         // criar disciplinas com o mesmo nome
 
-					disciplinas[i] = toupper(disciplinas[i]); // Transformar todas as letras em maiúsculas
+					disciplinas[i] = toupper(disciplinas[i]); // Transformar todas as letras em maiÃºsculas
 				}
 
 				todas_disc = fopen("todas_disc.txt", "a");
@@ -980,18 +980,18 @@ void opcao1() { // Parâmetro para cadastramento de disciplinas
 			}
 		}
 
-		else { // Se a disciplina já existir, a mensagem abaixo será apresentada
+		else { // Se a disciplina jÃ¡ existir, a mensagem abaixo serÃ¡ apresentada
 
-			printf("\n A disciplina e/ou código já existe(m)!!!\n\n");
+			printf("\n A disciplina e/ou cÃ³digo jÃ¡ existe(m)!!!\n\n");
 
 			system("pause");
 
 			printf("\n 1)Encerrar o cadastramento\n");
 			printf(" 2)Voltar para o menu de cadastramento de disciplinas\n");
 			printf(" 3)Cadastrar turma\n\n");
-			printf(" Opção: ");
+			printf(" OpÃ§Ã£o: ");
 
-			bloquear_teclas(menor_opcao = 1, maior_opcao = 3); // Chamada de Procedimento que só aceita números
+			bloquear_teclas(menor_opcao = 1, maior_opcao = 3); // Chamada de Procedimento que sÃ³ aceita nÃºmeros
 
 			switch (opcao_escolhida) {
 			case 1:
@@ -1038,7 +1038,7 @@ void opcao2() { // Procedimento para o cadastramento de turmas
 	char codigo[20], codigo2[20], nome_disciplina[TAM_MAX], nome_disc[TAM_MAX];
 	char Turma[20];
 
-	struct mencao { // Struct para informações de turma
+	struct mencao { // Struct para informaÃ§Ãµes de turma
 		int alunos_matriculados;
 		int trancamentos;
 		int alunos_SS;
@@ -1056,7 +1056,7 @@ void opcao2() { // Procedimento para o cadastramento de turmas
 	FILE *cod3; // Ponteiro para
 
 	printf(" \n Para qual disciplina deseja fazer o cadastro da turma?\n\n");
-	printf(" Nome ou código da disciplina:");
+	printf(" Nome ou cÃ³digo da disciplina:");
 	setbuf(stdin, NULL); // pesquisar sobre isso
 	do {
 		fgets(nome_disc, 100, stdin);
@@ -1068,27 +1068,27 @@ void opcao2() { // Procedimento para o cadastramento de turmas
 	}
 
 	for (i = 0; i < x; i++) {
-		nome_disc[i] = toupper(nome_disc[i]); // Transformar todas as letras em maiúsculas
+		nome_disc[i] = toupper(nome_disc[i]); // Transformar todas as letras em maiÃºsculas
 	}
 
-	disc_procurar(nome_disc); // PESQUISAR NOME OU PARTE DELE E VER SE JÁ EXISTE
+	disc_procurar(nome_disc); // PESQUISAR NOME OU PARTE DELE E VER SE JÃ EXISTE
 							  // ESSA DISCIPLINA CADASTRADA
 
 	snprintf(nome_disciplina, 50, "disciplina_%s.txt", nome_disc);
 
 	cod = fopen(nome_disciplina, "r");
 	fclose(cod);
-	if (cod == NULL) { // Se a disciplina não existir, a mensagem abaixo será
+	if (cod == NULL) { // Se a disciplina nÃ£o existir, a mensagem abaixo serÃ¡
 					   // apresentada
-		printf("\n Disciplina não encontrada!\n\n");
+		printf("\n Disciplina nÃ£o encontrada!\n\n");
 		system("pause");
 		system("cls");
 		printf(" 1)Encerrar o cadastramento\n");
 		printf(" 2)Voltar para o menu de cadastramento de turmas\n");
 		printf(" 3)Cadastrar disciplinas\n\n");
-		printf(" Opção: ");
+		printf(" OpÃ§Ã£o: ");
 
-		bloquear_teclas(menor_opcao = 1, maior_opcao = 3); // Chamada de Procedimento que só aceita números
+		bloquear_teclas(menor_opcao = 1, maior_opcao = 3); // Chamada de Procedimento que sÃ³ aceita nÃºmeros
 
 		switch (opcao_escolhida) {
 		case 1:
@@ -1111,11 +1111,11 @@ void opcao2() { // Procedimento para o cadastramento de turmas
 
 	printf("\n Nome da disciplina: %s\n", nome_disc);
 
-	printf("\n 1)Inserir informações da turma\n");
+	printf("\n 1)Inserir informaÃ§Ãµes da turma\n");
 	printf(" 2)Voltar para o menu inicial\n");
-	printf(" Opção: ");
+	printf(" OpÃ§Ã£o: ");
 
-	bloquear_teclas(menor_opcao, maior_opcao); // Chamada de Procedimento que só aceita números
+	bloquear_teclas(menor_opcao, maior_opcao); // Chamada de Procedimento que sÃ³ aceita nÃºmeros
 
 	switch (opcao_escolhida) {
 	case 1:
@@ -1125,17 +1125,17 @@ void opcao2() { // Procedimento para o cadastramento de turmas
 		printf(" Informe o ano: ");
 
 		bloquear_teclas(
-        menor_opcao = 1, maior_opcao =2020); // Chamada de Procedimento que só aceita números
+        menor_opcao = 1, maior_opcao =2020); // Chamada de Procedimento que sÃ³ aceita nÃºmeros
 		ano = opcao_escolhida;
 
 		printf("\n Informe o semestre: ");
 
-		bloquear_teclas(menor_opcao = 1, maior_opcao = 2); // Chamada de Procedimento que só aceita números
+		bloquear_teclas(menor_opcao = 1, maior_opcao = 2); // Chamada de Procedimento que sÃ³ aceita nÃºmeros
 		semestre = opcao_escolhida;
-		printf("°");
+		printf("Â°");
 
 		do {
-			printf("\n Informe o código da turma: ");
+			printf("\n Informe o cÃ³digo da turma: ");
 			fgets(codigo2, 20, stdin);
 		} while (codigo2[0] == '\n');
 
@@ -1152,8 +1152,8 @@ void opcao2() { // Procedimento para o cadastramento de turmas
 			do {
 				do {
 					system("cls");
-					printf(" Código de turma já existente! Por favor, informe um código válido!\n\n");
-					printf(" Informe o código da turma: ");
+					printf(" CÃ³digo de turma jÃ¡ existente! Por favor, informe um cÃ³digo vÃ¡lido!\n\n");
+					printf(" Informe o cÃ³digo da turma: ");
 					fgets(codigo2, 20, stdin);
 				} while (codigo2[0] == '\n');
 
@@ -1169,48 +1169,48 @@ void opcao2() { // Procedimento para o cadastramento de turmas
 
 		printf("\n Informe a quantidade de alunos matriculados: ");
 
-		bloquear_teclas(menor_opcao = 1,maior_opcao =1000); // Chamada de Procedimento que só aceita números
+		bloquear_teclas(menor_opcao = 1,maior_opcao =1000); // Chamada de Procedimento que sÃ³ aceita nÃºmeros
 		aluno.alunos_matriculados = opcao_escolhida;
 		decremento = decremento + aluno.alunos_matriculados;
 
 		printf("\n Informe os trancamentos: ");
-		bloquear_teclas(menor_opcao = 0,maior_opcao =decremento); // Chamada de Procedimento que só aceita números
+		bloquear_teclas(menor_opcao = 0,maior_opcao =decremento); // Chamada de Procedimento que sÃ³ aceita nÃºmeros
 		aluno.trancamentos = opcao_escolhida;
 		decremento = aluno.alunos_matriculados - aluno.trancamentos;
 
-		printf("\n Informe os alunos com mensão SS: ");
-		bloquear_teclas(menor_opcao = 0,maior_opcao =decremento); // Chamada de Procedimento que só aceita números
+		printf("\n Informe os alunos com mensÃ£o SS: ");
+		bloquear_teclas(menor_opcao = 0,maior_opcao =decremento); // Chamada de Procedimento que sÃ³ aceita nÃºmeros
 		aluno.alunos_SS = opcao_escolhida;
 		decremento = decremento - aluno.alunos_SS;
 
-		printf("\n Informe os alunos com mensão MS: ");
-		bloquear_teclas(menor_opcao = 0,maior_opcao =decremento); // Chamada de Procedimento que só aceita números
+		printf("\n Informe os alunos com mensÃ£o MS: ");
+		bloquear_teclas(menor_opcao = 0,maior_opcao =decremento); // Chamada de Procedimento que sÃ³ aceita nÃºmeros
 		aluno.alunos_MS = opcao_escolhida;
 		decremento = decremento - aluno.alunos_MS;
 
-		printf("\n Informe os alunos com mensão MM: ");
-		bloquear_teclas(menor_opcao = 0,maior_opcao =decremento); // Chamada de Procedimento que só aceita números
+		printf("\n Informe os alunos com mensÃ£o MM: ");
+		bloquear_teclas(menor_opcao = 0,maior_opcao =decremento); // Chamada de Procedimento que sÃ³ aceita nÃºmeros
 		aluno.alunos_MM = opcao_escolhida;
 		decremento = decremento - aluno.alunos_MM;
 
-		printf("\n Informe os alunos com mensão MI: ");
-		bloquear_teclas(menor_opcao = 0,maior_opcao =decremento); // Chamada de Procedimento que só aceita números
+		printf("\n Informe os alunos com mensÃ£o MI: ");
+		bloquear_teclas(menor_opcao = 0,maior_opcao =decremento); // Chamada de Procedimento que sÃ³ aceita nÃºmeros
 		aluno.alunos_MI = opcao_escolhida;
 		decremento = decremento - aluno.alunos_MI;
 
-		printf("\n Informe os alunos com mensão II: ");
-		bloquear_teclas(menor_opcao = 0,maior_opcao =decremento); // Chamada de Procedimento que só aceita números
+		printf("\n Informe os alunos com mensÃ£o II: ");
+		bloquear_teclas(menor_opcao = 0,maior_opcao =decremento); // Chamada de Procedimento que sÃ³ aceita nÃºmeros
 		aluno.alunos_II = opcao_escolhida;
 		decremento = decremento - aluno.alunos_II;
 
-		printf("\n Informe os alunos com mensão SR: ");
-		bloquear_teclas(menor_opcao = decremento,maior_opcao =decremento); // Chamada de Procedimento que só aceita números
+		printf("\n Informe os alunos com mensÃ£o SR: ");
+		bloquear_teclas(menor_opcao = decremento,maior_opcao =decremento); // Chamada de Procedimento que sÃ³ aceita nÃºmeros
 		aluno.alunos_SR = opcao_escolhida;
 		decremento = decremento - aluno.alunos_SR;
 
 		z = strlen(codigo);
 		for (i = 0; i < z; i++) {
-			codigo[i] =toupper(codigo[i]); // Transformar todas as letras em maiúsculas
+			codigo[i] =toupper(codigo[i]); // Transformar todas as letras em maiÃºsculas
 		}
 
 		cod = fopen(nome_disciplina, "a");
@@ -1230,7 +1230,7 @@ void opcao2() { // Procedimento para o cadastramento de turmas
 		alunos_MS_2 = aluno.alunos_MS;
 		alunos_MM_2 = aluno.alunos_MM;
 		alunos_matriculados_2 = aluno.alunos_matriculados;
-		perctotal = ((alunos_SS_2 + alunos_MS_2 + alunos_MM_2) * 100) /alunos_matriculados_2; // PARA SABER O PERCENTUAL DE APROVAÇÃO DA TURMA
+		perctotal = ((alunos_SS_2 + alunos_MS_2 + alunos_MM_2) * 100) /alunos_matriculados_2; // PARA SABER O PERCENTUAL DE APROVAÃ‡ÃƒO DA TURMA
 
 		if (perctotal >= 0 && perctotal < 30) {
 			perc1 = 1;
@@ -1285,13 +1285,13 @@ void opcao3() {
 	int x;
 
 	FILE *deletar_disc;		 // Ponteiro para abertura do arquivo para deletar disciplina
-	FILE *deletar_relatorio; // Ponteiro para abertura do arquivo para deletar relatório deral da disciplina que será excluida
+	FILE *deletar_relatorio; // Ponteiro para abertura do arquivo para deletar relatÃ³rio deral da disciplina que serÃ¡ excluida
 
 	fflush(stdin);
 
 	do {
 		system("cls");
-		printf(" Informe o nome ou código da disciplina que deseja excluir: ");
+		printf(" Informe o nome ou cÃ³digo da disciplina que deseja excluir: ");
 		fgets(nome_disc, 100, stdin);
 
 	} while (nome_disc[0] == '\n');
@@ -1301,7 +1301,7 @@ void opcao3() {
 		nome_disc[x - 1] = '\0';
 	}
 
-	disc_procurar(nome_disc); // VERIFICAR SE A DISCIPLINA JÁ EXISTE DENTRO DO ARQUIVO COM TODAS AS DISCIPLINAS
+	disc_procurar(nome_disc); // VERIFICAR SE A DISCIPLINA JÃ EXISTE DENTRO DO ARQUIVO COM TODAS AS DISCIPLINAS
 
 	snprintf(disc_txt, 100, "disciplina_%s.txt", nome_disc);
 	snprintf(disc_geral, 100, "geral_%s", disc_txt);
@@ -1312,7 +1312,7 @@ void opcao3() {
 	fclose(deletar_relatorio);
 
 	if (deletar_disc == NULL) {
-		printf("\n Disciplina não encontrada!");
+		printf("\n Disciplina nÃ£o encontrada!");
 		printf("\n Por favor, verifique se os dados foram digitados corretamente.\n");
 
 		fflush(stdin);
@@ -1326,14 +1326,14 @@ void opcao3() {
 		printf(" 1) Excluir disciplina\n");
 		printf(" 2) Voltar para o menu inicial\n\n");
 
-		printf(" Opção: ");
+		printf(" OpÃ§Ã£o: ");
 
-		bloquear_teclas(menor_opcao, maior_opcao); // Chamada de Procedimento que só aceita números
+		bloquear_teclas(menor_opcao, maior_opcao); // Chamada de Procedimento que sÃ³ aceita nÃºmeros
 
 		switch (opcao_escolhida) {
 		case 1:
 
-			decrementar_arq_geral(disc_geral); // DECREMENTAR VALORES DO ARQUIVO GERAL APÓS EXCLUSÃO DE DISCIPLINA
+			decrementar_arq_geral(disc_geral); // DECREMENTAR VALORES DO ARQUIVO GERAL APÃ“S EXCLUSÃƒO DE DISCIPLINA
 
 			apagar_disc(); // APAGAR NOME E CODIGO DA DISCIPLINA
 
@@ -1370,15 +1370,15 @@ void opcao4() {
 	int x = 0, i = 0, j = 0, k = 2, l = 0, m = 0;
 
 	FILE *apagar_turma; // Ponteiro para abertura do arquivo de disciplina para apagar turma
-	FILE *Temporario;   // Ponteiro para abertura do arquivo temporário
+	FILE *Temporario;   // Ponteiro para abertura do arquivo temporÃ¡rio
 	system("cls");
 
 	do {
 		system("cls");
-		printf(" Informe o nome ou código da disciplina na qual a turma está cadastrada: ");
+		printf(" Informe o nome ou cÃ³digo da disciplina na qual a turma estÃ¡ cadastrada: ");
 		fgets(nome_disc, 100, stdin);
 
-	} while (nome_disc[0] == '\n'); // Fará enquanto for digitado apenas enter
+	} while (nome_disc[0] == '\n'); // FarÃ¡ enquanto for digitado apenas enter
 
 	x = strlen(nome_disc);
 
@@ -1393,16 +1393,16 @@ void opcao4() {
 	apagar_turma = fopen(nome_disciplina, "r");
 	fclose(apagar_turma);
 
-	if (apagar_turma == NULL) {                         // Se a disciplina não existir, a mensagem abaixo será apresentada
-		printf("\n Disciplina não encontrada!\n\n");
+	if (apagar_turma == NULL) {                         // Se a disciplina nÃ£o existir, a mensagem abaixo serÃ¡ apresentada
+		printf("\n Disciplina nÃ£o encontrada!\n\n");
 		system("pause");
 		system("cls");
 		printf(" 1)Encerrar o cadastramento\n");
 		printf(" 2)Pesquisar disciplina novamente\n");
 		printf(" 3)Cadastrar disciplinas\n\n");
-		printf(" Opção: ");
+		printf(" OpÃ§Ã£o: ");
 
-		bloquear_teclas(menor_opcao = 1, maior_opcao = 3); // Chamada de Procedimento que só aceita números
+		bloquear_teclas(menor_opcao = 1, maior_opcao = 3); // Chamada de Procedimento que sÃ³ aceita nÃºmeros
 
 		switch (opcao_escolhida) {
 		case 1:
@@ -1436,78 +1436,78 @@ void opcao4() {
 		codigo_turma[x - 1] = '\0';
 	}
 
-	printf(" Informe o ano ao qual a turma está cadastrada: ");
+	printf(" Informe o ano ao qual a turma estÃ¡ cadastrada: ");
 
-	bloquear_teclas(menor_opcao = 0, maior_opcao = 2020); // Chamada de Procedimento que só aceita números
+	bloquear_teclas(menor_opcao = 0, maior_opcao = 2020); // Chamada de Procedimento que sÃ³ aceita nÃºmeros
 	ano = opcao_escolhida;
 
 	printf("\n Informe o semestre da disciplina: ");
 
-	bloquear_teclas(menor_opcao = 1, maior_opcao = 2); // Chamada de Procedimento que só aceita números
+	bloquear_teclas(menor_opcao = 1, maior_opcao = 2); // Chamada de Procedimento que sÃ³ aceita nÃºmeros
 	semestre = opcao_escolhida;
 
-	snprintf(turma, 20, "COD%s#%d%d", codigo_turma, ano, semestre); // Concatenação para encontrar a turma
+	snprintf(turma, 20, "COD%s#%d%d", codigo_turma, ano, semestre); // ConcatenaÃ§Ã£o para encontrar a turma
 
 	deletar_turma(turma, nome_disciplina, codigo_turma);
 	apagar_turma = fopen(nome_disciplina, "r");
 
 	printf("\n\a\a\a Tem certeza que deseja apagar \"%s\" das turmas cadastradas?\n\n", codigo_turma);
 	printf(" 1) Sim\n");
-	printf(" 2) Não - Voltar para o menu inicial\n\n");
-	printf(" Opção: ");
+	printf(" 2) NÃ£o - Voltar para o menu inicial\n\n");
+	printf(" OpÃ§Ã£o: ");
 
-	bloquear_teclas(menor_opcao = 1, maior_opcao = 2); // Chamada de Procedimento que só aceita números
+	bloquear_teclas(menor_opcao = 1, maior_opcao = 2); // Chamada de Procedimento que sÃ³ aceita nÃºmeros
 
 	switch (opcao_escolhida) {
 	case 1:
 
-		Temporario = fopen("arq_temporario.txt", "w"); // Arquivo temporário para armazenar todas as turmas, menos a que será apagada
+		Temporario = fopen("arq_temporario.txt", "w"); // Arquivo temporÃ¡rio para armazenar todas as turmas, menos a que serÃ¡ apagada
 		do {
-			i++; // Incrementação que servirá para encontrar o código
+			i++; // IncrementaÃ§Ã£o que servirÃ¡ para encontrar o cÃ³digo
 			k++;
 
-			fgets(procurar, 20, apagar_turma); // Pega todas as informações da turma
+			fgets(procurar, 20, apagar_turma); // Pega todas as informaÃ§Ãµes da turma
 
 			x = strlen(procurar);
 			if (procurar[x - 1] == '\n') {
 				procurar[x - 1] = '\0';
 			}
 
-			if (strcmp(procurar, turma) != 0 && k > i) { // Enquanto ele não encontrar a turma, ele irá printar as informações dentro do arquivo temporário
+			if (strcmp(procurar, turma) != 0 && k > i) { // Enquanto ele nÃ£o encontrar a turma, ele irÃ¡ printar as informaÃ§Ãµes dentro do arquivo temporÃ¡rio
 				fprintf(Temporario, "%s\n", procurar);
 			}
 
-			if (strcmp(procurar, turma) == 0) { // Se ele encontrar a turma, ele irá pular as informações da turma que será apagada
+			if (strcmp(procurar, turma) == 0) { // Se ele encontrar a turma, ele irÃ¡ pular as informaÃ§Ãµes da turma que serÃ¡ apagada
 				m++;
-				k = k - 10; // Decrementa o contador para pular as informações da turma que será apagada
+				k = k - 10; // Decrementa o contador para pular as informaÃ§Ãµes da turma que serÃ¡ apagada
 			}
 
 			if (m > 0) {
 				m++;
 				if (m > 2) {
 					if (j < 8) {
-						info_arq[j] = atoi(procurar); // "info_arq" servirá para decrementar os dados da turma apagada
+						info_arq[j] = atoi(procurar); // "info_arq" servirÃ¡ para decrementar os dados da turma apagada
                                                     // no arquivo geral e no arquivo geral da disciplina
 
-						j++; // Incrementa para salvar em uma nova posição do vetor "info_arq"
+						j++; // Incrementa para salvar em uma nova posiÃ§Ã£o do vetor "info_arq"
 					}
 				}
 
-				k++; // Para ir incrementando até ultrapassar "i". Servirá para pular as linhas que não se quer.
+				k++; // Para ir incrementando atÃ© ultrapassar "i". ServirÃ¡ para pular as linhas que nÃ£o se quer.
 			}
 
-		} while (!feof(apagar_turma)); // Fará enquanto não chegar no final do arquivo
+		} while (!feof(apagar_turma)); // FarÃ¡ enquanto nÃ£o chegar no final do arquivo
 		fclose(apagar_turma);
                                 // Fechamento dos ponteiros
 		fclose(Temporario);
 
-		decrementar_turma_disc(nome_disciplina,info_arq[2],info_arq[3],info_arq[4],info_arq[5],info_arq[6],info_arq[7],info_arq[0],info_arq[1],nome_disc); // Chamada de função para decrementar a turma apagada do arquivo geral
-		decrementar_turma_arq_geral(info_arq); // Chamada de função para decrementar a turma apagada do arquivo geral
+		decrementar_turma_disc(nome_disciplina,info_arq[2],info_arq[3],info_arq[4],info_arq[5],info_arq[6],info_arq[7],info_arq[0],info_arq[1],nome_disc); // Chamada de funÃ§Ã£o para decrementar a turma apagada do arquivo geral
+		decrementar_turma_arq_geral(info_arq); // Chamada de funÃ§Ã£o para decrementar a turma apagada do arquivo geral
 
-		apagar_turma = fopen(nome_disciplina, "w"); // Abre a disciplina com "w" para pegar as turmas do "arq_temporario" que não foram apagadas e reprintar
-		Temporario = fopen("arq_temporario.txt", "r"); // Pegará as informações das turmas que estão nesse arquivo e printará na disciplina
+		apagar_turma = fopen(nome_disciplina, "w"); // Abre a disciplina com "w" para pegar as turmas do "arq_temporario" que nÃ£o foram apagadas e reprintar
+		Temporario = fopen("arq_temporario.txt", "r"); // PegarÃ¡ as informaÃ§Ãµes das turmas que estÃ£o nesse arquivo e printarÃ¡ na disciplina
 
-		l = 0; // Indicará as
+		l = 0; // IndicarÃ¡ as
 		do {
 			fgets(apagar, 20, Temporario);
 
@@ -1557,15 +1557,15 @@ void opcao5() {
 	setbuf(stdin, NULL);
 
 	system("cls");
-	printf("\n\n 1)Gerar relatório de disciplina\n");
+	printf("\n\n 1)Gerar relatÃ³rio de disciplina\n");
 	printf(" 2)Voltar ao menu inicial\n");
-	printf(" Opção:");
-	bloquear_teclas(menor_opcao = 1, maior_opcao = 2); // Chamada de Procedimento que só aceita números
+	printf(" OpÃ§Ã£o:");
+	bloquear_teclas(menor_opcao = 1, maior_opcao = 2); // Chamada de Procedimento que sÃ³ aceita nÃºmeros
 
 	switch (opcao_escolhida) {
 	case 1:
 
-		printf("\n\n Informe o código ou nome da disciplina que deseja gerar o relatório:");
+		printf("\n\n Informe o cÃ³digo ou nome da disciplina que deseja gerar o relatÃ³rio:");
 
 		do {
 			fgets(nome_disc, 100, stdin);
@@ -1577,7 +1577,7 @@ void opcao5() {
 		}
 
 		for (i = 0; i < x; i++) {
-			nome_disc[i] = toupper(nome_disc[i]); // Transformar todas as letras em maiúsculas
+			nome_disc[i] = toupper(nome_disc[i]); // Transformar todas as letras em maiÃºsculas
 		}
 
 		disc_procurar(nome_disc);
@@ -1590,12 +1590,12 @@ void opcao5() {
 		if (encontrar_disc == NULL) {
 		nenhuma_turma:
 
-			printf("\n Disciplina não encontrada ou nenhuma turma cadastrada!\n\n");
+			printf("\n Disciplina nÃ£o encontrada ou nenhuma turma cadastrada!\n\n");
 			printf(" 1)Encerrar programa\n");
 			printf(" 2)Voltar para o menu anterior\n\n");
-			printf(" Opção: ");
+			printf(" OpÃ§Ã£o: ");
 
-			bloquear_teclas(menor_opcao = 1,maior_opcao = 2); // Chamada de Procedimento que só aceita números
+			bloquear_teclas(menor_opcao = 1,maior_opcao = 2); // Chamada de Procedimento que sÃ³ aceita nÃºmeros
 
 			switch (opcao_escolhida) {
 			case 1:
@@ -1628,9 +1628,9 @@ void opcao5() {
 		perc_MM = (info_arq[4] * 100) / info_arq[0];
 		perc_alunos_aprovados += (perc_SS + perc_MS + perc_MM);
 
-		printf("\n               RELATÓRIO DA DISCIPLINA %s\n\n", nome_disc);
+		printf("\n               RELATÃ“RIO DA DISCIPLINA %s\n\n", nome_disc);
 
-		printf("\n Percentual de evasão (trancamentos + alunos_SR): %.2f%%\n",perc_evasao);
+		printf("\n Percentual de evasÃ£o (trancamentos + alunos_SR): %.2f%%\n",perc_evasao);
 		printf(" Percentual de alunos aprovados: %.2f%%\n", perc_alunos_aprovados);
 		printf(" Percentual de alunos aprovados com SS: %.2f%%\n", perc_SS);
 		printf(" Percentual de alunos aprovados com MS: %.2f%%\n", perc_MS);
@@ -1659,8 +1659,8 @@ void opcao6() {
 	char melhor2[TAM_MAX];
 	int i, x = 0;
 
-	FILE *melhor_disc; // Ponteiro para abertura do arquivo com maior índice de aprovação
-	FILE *pior_disc;   // Ponteiro para abertura do arquivo com menor índice de aprovação
+	FILE *melhor_disc; // Ponteiro para abertura do arquivo com maior Ã­ndice de aprovaÃ§Ã£o
+	FILE *pior_disc;   // Ponteiro para abertura do arquivo com menor Ã­ndice de aprovaÃ§Ã£o
 	FILE *cod3;		   // Ponteiro para abertura do arquivo geral
 
 	cod3 = fopen("geral.txt", "r"); // Abre o arquivo geral
@@ -1672,12 +1672,12 @@ void opcao6() {
 	fclose(cod3);
 
 	if (info_arq[0] == 0) {
-		system("cls"); // Caso o arquivo esteja criado, porém sem dados, a mensagem abaixo
-                        // será apresentada na tela, com o intúito de evitar que o programa
-                        // imprima LIXO DE  MEMÓRIA na tela
+		system("cls"); // Caso o arquivo esteja criado, porÃ©m sem dados, a mensagem abaixo
+                        // serÃ¡ apresentada na tela, com o intÃºito de evitar que o programa
+                        // imprima LIXO DE  MEMÃ“RIA na tela
 
-		printf("\n\n\n O relatório não pode ser gerado.\n");
-		printf(" Verifique se há turmas cadastradas.\n\n");
+		printf("\n\n\n O relatÃ³rio nÃ£o pode ser gerado.\n");
+		printf(" Verifique se hÃ¡ turmas cadastradas.\n\n");
 
 		system("pause");
 		system("cls");
@@ -1688,7 +1688,7 @@ void opcao6() {
 
 	perc_turmas = info_arq[8] + info_arq[9] + info_arq[10];
 	perc_menor_30 = (info_arq[8] * 100) / perc_turmas;
-	perc_entre_30_50 = (info_arq[9] * 100) / perc_turmas;   // Cálculos para ver o percentual de aprovação das turmas
+	perc_entre_30_50 = (info_arq[9] * 100) / perc_turmas;   // CÃ¡lculos para ver o percentual de aprovaÃ§Ã£o das turmas
 	perc_maior_50 = (info_arq[10] * 100) / perc_turmas;
 
 	perc_evasao = ((info_arq[1] + info_arq[7]) * 100) / info_arq[0];
@@ -1700,16 +1700,16 @@ void opcao6() {
 
 	system("cls");
 
-	printf("                    RELATÓRIO GERAL\n\n");
+	printf("                    RELATÃ“RIO GERAL\n\n");
 
-	printf("\n Percentual de evasão (trancamentos + alunos_SR): %.2f%%\n",perc_evasao);
+	printf("\n Percentual de evasÃ£o (trancamentos + alunos_SR): %.2f%%\n",perc_evasao);
 	printf(" Percentual de alunos aprovados: %.2f%%\n", perc_alunos_aprovados);
 	printf(" Percentual de alunos aprovados com SS: %.2f%%\n", perc_SS);
-	printf(" Percentual de alunos aprovados com MS: %.2f%%\n", perc_MS);                        //RELATÓRIO GERAL
+	printf(" Percentual de alunos aprovados com MS: %.2f%%\n", perc_MS);                        //RELATÃ“RIO GERAL
 	printf(" Percentual de alunos aprovados com MM: %.2f%%\n", perc_MM);
-	printf(" Percentual de turmas com aprovação entre 0%% e 30%%: %.2f%%\n",perc_menor_30);
-	printf(" Percentual de turmas com aprovação entre 30%% e 50%%: %.2f%%\n",perc_entre_30_50);
-	printf(" Percentual de turmas com aprovação maior ou igual à 50%%: %.2f%%\n\n",perc_maior_50);
+	printf(" Percentual de turmas com aprovaÃ§Ã£o entre 0%% e 30%%: %.2f%%\n",perc_menor_30);
+	printf(" Percentual de turmas com aprovaÃ§Ã£o entre 30%% e 50%%: %.2f%%\n",perc_entre_30_50);
+	printf(" Percentual de turmas com aprovaÃ§Ã£o maior ou igual Ã  50%%: %.2f%%\n\n",perc_maior_50);
 
 	pior_melhor();
 
@@ -1770,29 +1770,29 @@ void opcao6() {
 
 	printf(" MELHOR DISCIPLINA: ");
 
-	if (melhor1[0] == '0' && melhor2[0] == '0') { // Caso seja 0 nas duas strings, indica que não existe turmas cadastradas
+	if (melhor1[0] == '0' && melhor2[0] == '0') { // Caso seja 0 nas duas strings, indica que nÃ£o existe turmas cadastradas
 
-		printf(" NENHUMA DISCIPLINA CADASTRADA!\n\n"); // Printa essa mensagem caso não tenha turma cadastrada
+		printf(" NENHUMA DISCIPLINA CADASTRADA!\n\n"); // Printa essa mensagem caso nÃ£o tenha turma cadastrada
 	} else {
 		printf(" %s - %s%%\n\n", melhor1, melhor2); // Printa a melhor disciplina e porcentagem, respectivamente
 	}
 
 	printf(" PIOR DISCIPLINA: ");
 
-	if (pior1[0] == '0' && pior2[0] == '1') { // Caso seja 0 e 1 nas strings, indica que não existe turmas cadastradas
+	if (pior1[0] == '0' && pior2[0] == '1') { // Caso seja 0 e 1 nas strings, indica que nÃ£o existe turmas cadastradas
 
-		printf(" NENHUMA DISCIPLINA CADASTRADA!\n"); // Printa essa mensagem caso não tenha turma cadastrada
+		printf(" NENHUMA DISCIPLINA CADASTRADA!\n"); // Printa essa mensagem caso nÃ£o tenha turma cadastrada
 	} else {
 		printf(" %s - %s%%\n\n", pior1, pior2); // Printa a pior disciplina e porcentagem, respectivamente
 	}
 
 	system("pause");
 
-	melhor_disc = fopen("melhor_disc.txt", "w"); // Zera as informações para gerar os relatórios de pior e melhor disciplina novamente
+	melhor_disc = fopen("melhor_disc.txt", "w"); // Zera as informaÃ§Ãµes para gerar os relatÃ³rios de pior e melhor disciplina novamente
 	fprintf(melhor_disc, "0\n0");
 	fclose(melhor_disc);
 
-	pior_disc = fopen("pior_disc.txt", "w"); // Zera as informações para gerar os relatórios de pior e melhor disciplina novamente
+	pior_disc = fopen("pior_disc.txt", "w"); // Zera as informaÃ§Ãµes para gerar os relatÃ³rios de pior e melhor disciplina novamente
 	fprintf(pior_disc, "101\n0");
 	fclose(pior_disc);
 
@@ -1803,18 +1803,18 @@ void opcao7() {
 	int menor_opcao, maior_opcao;
 
 	system("cls");
-	printf("\a\a\a\n Você realmente deseja SAIR do programa?\n\n");
+	printf("\a\a\a\n VocÃª realmente deseja SAIR do programa?\n\n");
 	printf(" 1)Sim\n");
-	printf(" 2)Não - Voltar para o menu inicial\n\n");
-	printf(" Opção: ");
+	printf(" 2)NÃ£o - Voltar para o menu inicial\n\n");
+	printf(" OpÃ§Ã£o: ");
 
-	bloquear_teclas(menor_opcao=1, maior_opcao=2); // Chamada de Procedimento que só aceita números
+	bloquear_teclas(menor_opcao=1, maior_opcao=2); // Chamada de Procedimento que sÃ³ aceita nÃºmeros
 
 	switch (opcao_escolhida) {
 	case 1:
 
 		system("cls");
-		printf("\n Obrigado por utilizar nossos serviços! Tenha um ótimo dia!\n\n");
+		printf("\n Obrigado por utilizar nossos serviÃ§os! Tenha um Ã³timo dia!\n\n");
 		system("type aqui.txt ");
 		exit(0);
 		break;
@@ -1829,8 +1829,8 @@ void opcao7() {
 void opcao8() {
 	system("cls");
 	printf("\n");
-	printf("                    DISCIPLINAS JÁ CADASTRADAS\n");
-	printf("                        DISCIPLINA - CÓDIGO\n");
+	printf("                    DISCIPLINAS JÃ CADASTRADAS\n");
+	printf("                        DISCIPLINA - CÃ“DIGO\n");
 	system("type todas_disc.txt");
 	printf("\n\n");
 	system("pause");
@@ -1843,51 +1843,51 @@ void menu_principal() { // Menu principal
 	system("cls");
 	system("type aqui2.txt");
 
-	printf(" Digite a opção desejada\n\n");
+	printf(" Digite a opÃ§Ã£o desejada\n\n");
 
-	printf(" Menu de opções:\n\n");
+	printf(" Menu de opÃ§Ãµes:\n\n");
 	printf(" 1)Cadastrar uma disciplina\n");
 	printf(" 2)Cadastrar uma turma\n");
 	printf(" 3)Excluir disciplina\n");
 	printf(" 4)Excluir turma\n");
-	printf(" 5)Gerar relatório por disciplina\n");
-	printf(" 6)Gerar relatório geral\n");
+	printf(" 5)Gerar relatÃ³rio por disciplina\n");
+	printf(" 6)Gerar relatÃ³rio geral\n");
 	printf(" 7)Sair do programa\n");
-	printf(" 8)Disciplinas já cadastradas\n\n");
+	printf(" 8)Disciplinas jÃ¡ cadastradas\n\n");
 
-	printf(" Opção:");
-	bloquear_teclas(menor_opcao=1, maior_opcao=8); // Chamada de Procedimento que só aceita números
+	printf(" OpÃ§Ã£o:");
+	bloquear_teclas(menor_opcao=1, maior_opcao=8); // Chamada de Procedimento que sÃ³ aceita nÃºmeros
 
 	switch (opcao_escolhida) {
 	case 1:
-		opcao1(); // Chamada de Parâmetro para cadastrar disciplina
+		opcao1(); // Chamada de ParÃ¢metro para cadastrar disciplina
 		break;
 
 	case 2:
-		opcao2(); // Chamada de Parâmetro para cadastrar uma turma
+		opcao2(); // Chamada de ParÃ¢metro para cadastrar uma turma
 		break;
 
 	case 3:
-		opcao3(); // Chamada de Parâmetro para excluir disciplina
+		opcao3(); // Chamada de ParÃ¢metro para excluir disciplina
 		break;
 
 	case 4:
-		opcao4(); // Chamada de Parâmetro para excluir turma
+		opcao4(); // Chamada de ParÃ¢metro para excluir turma
 		break;
 
 	case 5:
-		opcao5(); // Chamada de Parâmetro para gerar relatório por disciplina
+		opcao5(); // Chamada de ParÃ¢metro para gerar relatÃ³rio por disciplina
 		break;
 
 	case 6:
-		opcao6(); // Chamada de Parâmetro para gerar relatório geral
+		opcao6(); // Chamada de ParÃ¢metro para gerar relatÃ³rio geral
 		break;
 
 	case 7:
-		opcao7(); // Chamada de Parâmetro para sair do programa
+		opcao7(); // Chamada de ParÃ¢metro para sair do programa
 		break;
 
 	case 8:
-		opcao8(); // Chamada de Parâmetro para apresentar todas as disciplinas cadastradas
+		opcao8(); // Chamada de ParÃ¢metro para apresentar todas as disciplinas cadastradas
 	}
 }
