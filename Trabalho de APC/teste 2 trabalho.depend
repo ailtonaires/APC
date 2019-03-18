@@ -1,0 +1,37 @@
+# depslib dependency file v1.0
+1529511995 source:c:\users\ailton\desktop\trabalho apc\teste 2 trabalho\blocknumeros.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<ctype.h>
+
+1529515834 source:c:\users\ailton\desktop\trabalho apc\teste 2 trabalho\main.c
+	"blocknumeros.h"
+	<conio.h>
+	<ctype.h>
+	<locale.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<windows.h>
+
+1529074116 c:\users\ailton\desktop\trabalho apc\teste 2 trabalho\blocknumeros.h
+
+1529515595 source:c:\users\ailton\google drive\apc\trabalho de apc\blocknumeros.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<ctype.h>
+
+1529519434 source:c:\users\ailton\google drive\apc\trabalho de apc\main.c
+	"blocknumeros.h"
+	<conio.h>
+	<ctype.h>
+	<locale.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<windows.h>
+
+1529077716 c:\users\ailton\google drive\apc\trabalho de apc\blocknumeros.h
+
