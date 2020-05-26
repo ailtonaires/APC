@@ -35,3 +35,21 @@
 
 1529077716 c:\users\ailton\google drive\apc\trabalho de apc\blocknumeros.h
 
+1529497594 source:c:\users\ailton\apc\trabalho de apc\blocknumeros.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<ctype.h>
+
+1552952386 source:c:\users\ailton\apc\trabalho de apc\main.c
+	"blocknumeros.h"
+	<conio.h>
+	<ctype.h>
+	<locale.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<windows.h>
+
+1529059716 c:\users\ailton\apc\trabalho de apc\blocknumeros.h
+
